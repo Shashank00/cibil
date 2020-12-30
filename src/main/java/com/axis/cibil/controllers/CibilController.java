@@ -13,8 +13,8 @@ import java.util.Random;
 @RestController
 public class CibilController {
 
-    @RequestMapping(value = "/cibilPost", method = RequestMethod.POST)
-    public Mono<Object> getCibilResponse(@RequestBody String request) throws CibilException {
+    @RequestMapping(value = "/cibilPost", method = RequestMethod.POST, produces = "application/json")
+    public Mono<? extends Object> getCibilResponse(@RequestBody String request) throws CibilException {
 
         if (checkFailure() || request == null) {
             throw new CibilException("Internal Server Error", "Internal Server Error in processing Cibil Request");
@@ -22,7 +22,7 @@ public class CibilController {
             try {
                 Thread.sleep(5000);
                 CibilResponse response = new CibilResponse("Approved", "100", "007");
-                return Mono.just(response);
+                return Mono.just(response.toString()).log();
 
             } catch (InterruptedException e) {
 

@@ -1,8 +1,9 @@
 package com.axis.cibil.exception.handler;
 
-import com.axis.cibil.exception.CibilException;
+import reactor.core.publisher.Mono;
 import com.axis.cibil.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
+import com.axis.cibil.exception.CibilException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,7 +15,7 @@ public class CibilExceptionHandler {
     @ExceptionHandler(CibilException.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
-    public ErrorResponse genericThrowable(CibilException e) {
-        return new ErrorResponse("500", e.message);
+    public Mono<String> genericThrowable(CibilException e) {
+        return Mono.just(new ErrorResponse("500", e.message).toString());
     }
 }
