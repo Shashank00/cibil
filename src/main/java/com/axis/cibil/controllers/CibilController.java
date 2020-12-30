@@ -1,14 +1,13 @@
 package com.axis.cibil.controllers;
 
-import com.axis.cibil.exception.CibilException;
+import java.util.Random;
+import reactor.core.publisher.Mono;
 import com.axis.cibil.response.CibilResponse;
+import com.axis.cibil.exception.CibilException;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Mono;
-
-import java.util.Random;
 
 @RestController
 public class CibilController {
@@ -22,7 +21,7 @@ public class CibilController {
             try {
                 Thread.sleep(5000);
                 CibilResponse response = new CibilResponse("Approved", "100", "007");
-                return Mono.just(response.toString()).log();
+                return Mono.just(response);
 
             } catch (InterruptedException e) {
 

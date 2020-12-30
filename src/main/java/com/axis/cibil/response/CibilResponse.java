@@ -1,11 +1,18 @@
 package com.axis.cibil.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CibilResponse {
+
+    @JsonProperty("status")
     private String status;
+
+    @JsonProperty("cibilValueFirst")
     private String cibilValueFirst;
+
+    @JsonProperty("cibilValueSecond")
     private String cibilValueSecond;
 
 
